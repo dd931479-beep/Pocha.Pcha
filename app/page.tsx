@@ -19,6 +19,7 @@ export default function Home() {
     }
   };
 
+  
   // 動画の再生位置を監視
   useEffect(() => {
     const video = videoRef.current;
