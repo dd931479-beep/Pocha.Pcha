@@ -44,7 +44,25 @@ export default function Home() {
   }, [isCounting, seconds]);
 
   return (
-    <div style={{ backgroundColor: '#000', height: '100dvh', width: '100vw', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end', position: 'relative', overflow: 'hidden', fontFamily: 'sans-serif' }}>
+    /* 
+      position: fixed にすることで親の margin/padding を完全に無視し、
+      画面全体を支配します。スクロールも物理的に発生しません。
+    */
+    <div style={{ 
+      backgroundColor: '#000', 
+      height: '100dvh', 
+      width: '100vw', 
+      display: 'flex', 
+      flexDirection: 'column', 
+      alignItems: 'center', 
+      justifyContent: 'flex-end', 
+      position: 'fixed', // relativeから変更
+      top: 0, 
+      left: 0, 
+      overflow: 'hidden', // スクロール禁止
+      zIndex: 9999,      // 他の要素より上に
+      fontFamily: 'sans-serif' 
+    }}>
       
       <video
         ref={videoRef}
@@ -56,14 +74,13 @@ export default function Home() {
         onCanPlay={(e) => {
           e.currentTarget.muted = true;
         }}
-
         style={{ 
           position: 'absolute', 
           top: 0, 
           left: 0, 
           width: '100%', 
           height: '100%', 
-          objectFit: 'cover',
+          objectFit: 'cover', // 横幅を合わせつつ縦を切る
           zIndex: 1, 
           opacity: isReady ? 0.6 : 1, 
           transition: 'opacity 0.5s'
@@ -109,13 +126,13 @@ export default function Home() {
       </div>
 
       <style>{`
-        /* ブラウザが勝手につける余白を根こそぎ消す設定 */
+        /* ページ全体に対して余白・スクロールを強制無効化 */
         :global(html), :global(body) {
           margin: 0 !important;
           padding: 0 !important;
-          width: 100%;
-          height: 100%;
-          overflow: hidden;
+          overflow: hidden !important;
+          height: 100dvh !important;
+          width: 100vw !important;
         }
 
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
