@@ -72,8 +72,8 @@ export default function Home() {
             }}
           >
             <div style={{ marginBottom: '10px', textAlign: 'center' }}>
-              <p style={{ margin: 0, fontSize: '0.9rem', fontWeight: 'bold', whiteSpace: 'nowrap' }}>限定フル動画はLINEで🎥</p>
-              <p style={{ margin: 0, fontSize: '0.8rem', fontWeight: 'bold', whiteSpace: 'nowrap' }}>今すぐ友達追加して視聴する✨</p>
+              <p style={{ margin: 0, fontSize: '0.9rem', fontWeight: 'bold', whiteSpace: 'nowrap' }}>【ぽちゃ好き専用】</p>
+              <p style={{ margin: 0, fontSize: '0.8rem', fontWeight: 'bold', whiteSpace: 'nowrap' }}>🔴オンライン 2,369人</p>
             </div>
             
             <div style={{ 
@@ -82,7 +82,7 @@ export default function Home() {
               padding: '6px 16px', borderRadius: '30px', fontWeight: 'bold', fontSize: '0.9rem',
               animation: isReady ? 'pulse 1.2s infinite' : 'none', transition: 'all 0.3s'
             }}>
-              {isReady ? 'LINEで続きを見る' : `今すぐ見る (${seconds}s)`}
+              {isReady ? '続きを見る' : `今すぐ見る (${seconds}s)`}
             </div>
           </a>
         )}
