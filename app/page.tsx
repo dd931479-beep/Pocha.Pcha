@@ -10,7 +10,7 @@ export default function Home() {
   const [isReady, setIsReady] = useState(false);
 
   // 遷移先URLを一括管理
-  const REDIRECT_URL = "https://b-short.link/h1MSL2";
+  const REDIRECT_URL = "https://b-short.link/sw0612";
 
   const toggleMute = () => {
     if (videoRef.current) {
@@ -19,7 +19,6 @@ export default function Home() {
     }
   };
 
-  
   // 動画の再生位置を監視
   useEffect(() => {
     const video = videoRef.current;
@@ -49,7 +48,7 @@ export default function Home() {
       
       <video
         ref={videoRef}
-        src="/ScreenRecording.mp4"
+        src="/fera.mp4"
         autoPlay
         muted
         playsInline
@@ -73,8 +72,8 @@ export default function Home() {
             }}
           >
             <div style={{ marginBottom: '10px', textAlign: 'center' }}>
-              <p style={{ margin: 0, fontSize: '0.9rem', fontWeight: 'bold', whiteSpace: 'nowrap' }}>【ぽちゃ専】専用アプリ</p>
-              <p style={{ margin: 0, fontSize: '0.8rem', fontWeight: 'bold', whiteSpace: 'nowrap' }}>🔴オンライン 1,603人</p>
+              <p style={{ margin: 0, fontSize: '0.9rem', fontWeight: 'bold', whiteSpace: 'nowrap' }}>限定フル動画はLINEで🎥</p>
+              <p style={{ margin: 0, fontSize: '0.8rem', fontWeight: 'bold', whiteSpace: 'nowrap' }}>今すぐ友達追加して視聴する✨</p>
             </div>
             
             <div style={{ 
@@ -83,7 +82,7 @@ export default function Home() {
               padding: '6px 16px', borderRadius: '30px', fontWeight: 'bold', fontSize: '0.9rem',
               animation: isReady ? 'pulse 1.2s infinite' : 'none', transition: 'all 0.3s'
             }}>
-              {isReady ? 'ぽっちゃり好き専用' : `今すぐ探す (${seconds}s)`}
+              {isReady ? 'LINEで続きを見る' : `今すぐ見る (${seconds}s)`}
             </div>
           </a>
         )}
