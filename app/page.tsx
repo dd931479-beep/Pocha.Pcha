@@ -56,7 +56,7 @@ export default function Home() {
         onCanPlay={(e) => {
           e.currentTarget.muted = true;
         }}
-        
+
         style={{ 
           position: 'absolute', 
           top: 0, 
@@ -109,6 +109,15 @@ export default function Home() {
       </div>
 
       <style>{`
+        /* ブラウザが勝手につける余白を根こそぎ消す設定 */
+        :global(html), :global(body) {
+          margin: 0 !important;
+          padding: 0 !important;
+          width: 100%;
+          height: 100%;
+          overflow: hidden;
+        }
+
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes pulse { 0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,255,255,0.7); } 70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(255,255,255,0); } 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,255,255,0); } }
       `}</style>
