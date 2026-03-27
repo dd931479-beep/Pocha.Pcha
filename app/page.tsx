@@ -100,8 +100,8 @@ export default function Home() {
             }}
           >
             <div style={{ marginBottom: '10px', textAlign: 'center' }}>
-              <p style={{ margin: 0, fontSize: '0.9rem', fontWeight: 'bold', whiteSpace: 'nowrap' }}>【ぽちゃ好き専用】</p>
-              <p style={{ margin: 0, fontSize: '0.8rem', fontWeight: 'bold', whiteSpace: 'nowrap' }}>🔴オンライン 2,369人</p>
+              <p style={{ margin: 0, fontSize: '0.9rem', fontWeight: 'bold', whiteSpace: 'nowrap' }}>【アプリ限定】</p>
+              <p style={{ margin: 0, fontSize: '0.8rem', fontWeight: 'bold', whiteSpace: 'nowrap' }}>🔴LIVE配信中</p>
             </div>
             
             <div style={{ 
