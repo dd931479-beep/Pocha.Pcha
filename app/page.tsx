@@ -5,12 +5,11 @@ import { useState, useEffect, useRef } from "react";
 export default function Home() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isCounting, setIsCounting] = useState(false);
-  const [seconds, setSeconds] = useState(3);
+  const [seconds, setSeconds] = useState(5); // カウントダウンは5秒
   const [isMuted, setIsMuted] = useState(true);
   const [isReady, setIsReady] = useState(false);
 
-  // 遷移先URLを一括管理
-  const REDIRECT_URL = "https://b-short.link/sw0612";
+  const REDIRECT_URL = "https://b-short.link";
 
   const toggleMute = () => {
     if (videoRef.current) {
@@ -19,16 +18,12 @@ export default function Home() {
     }
   };
 
-  // 動画の再生位置を監視
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-    const handleTimeUpdate = () => {
-      if (video.currentTime >= 2 && !isCounting) setIsCounting(true);
-    };
-    video.addEventListener("timeupdate", handleTimeUpdate);
-    return () => video.removeEventListener("timeupdate", handleTimeUpdate);
-  }, [isCounting]);
+  // 動画が再生開始されたら3秒タイマーをスタート
+  const handlePlay = () => {
+    setTimeout(() => {
+      setIsCounting(true);
+    }, 3000); // 「3秒後」を指定
+  };
 
   // カウントダウンと自動遷移
   useEffect(() => {
@@ -39,51 +34,25 @@ export default function Home() {
     } else {
       setIsReady(true);
       videoRef.current?.pause();
-      window.location.href = REDIRECT_URL; // 自動遷移
+      window.location.href = REDIRECT_URL;
     }
   }, [isCounting, seconds]);
 
   return (
-    /* 
-      position: fixed にすることで親の margin/padding を完全に無視し、
-      画面全体を支配します。スクロールも物理的に発生しません。
-    */
-    <div style={{ 
-      backgroundColor: '#000', 
-      height: '100dvh', 
-      width: '100vw', 
-      display: 'flex', 
-      flexDirection: 'column', 
-      alignItems: 'center', 
-      justifyContent: 'flex-end', 
-      position: 'fixed', // relativeから変更
-      top: 0, 
-      left: 0, 
-      overflow: 'hidden', // スクロール禁止
-      zIndex: 9999,      // 他の要素より上に
-      fontFamily: 'sans-serif' 
-    }}>
+    <div style={{ backgroundColor: '#000', height: '100dvh', width: '100vw', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end', position: 'relative', overflow: 'hidden', fontFamily: 'sans-serif' }}>
       
       <video
         ref={videoRef}
-        src="/ScreenRecording.mp4"
+        // CloudinaryのURLに差し替え（最適化パラメータ付き）
+        src="https://res.cloudinary.com/dpakyf8su/video/upload/q_auto/f_auto/v1775193124/2026-04-01_18-17-24_upkiaf.mp4"
         autoPlay
         muted
         playsInline
         loop
-        onCanPlay={(e) => {
-          e.currentTarget.muted = true;
-        }}
+        onPlay={handlePlay}
         style={{ 
-          position: 'absolute', 
-          top: 0, 
-          left: 0, 
-          width: '100%', 
-          height: '100%', 
-          objectFit: 'cover', // 横幅を合わせつつ縦を切る
-          zIndex: 1, 
-          opacity: isReady ? 0.6 : 1, 
-          transition: 'opacity 0.5s'
+          position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', 
+          objectFit: 'cover', zIndex: 1, opacity: isReady ? 0.6 : 1, transition: 'opacity 0.5s'
         }}
       />
 
@@ -100,8 +69,8 @@ export default function Home() {
             }}
           >
             <div style={{ marginBottom: '10px', textAlign: 'center' }}>
-              <p style={{ margin: 0, fontSize: '0.9rem', fontWeight: 'bold', whiteSpace: 'nowrap' }}>【アプリ限定】</p>
-              <p style={{ margin: 0, fontSize: '0.8rem', fontWeight: 'bold', whiteSpace: 'nowrap' }}>🔴LIVE配信中</p>
+              <p style={{ margin: 0, fontSize: '0.9rem', fontWeight: 'bold', whiteSpace: 'nowrap' }}>フル（12分）を見る</p>
+              <p style={{ margin: 0, fontSize: '0.8rem', fontWeight: 'bold', whiteSpace: 'nowrap' }}>無料でログイン</p>
             </div>
             
             <div style={{ 
@@ -126,15 +95,6 @@ export default function Home() {
       </div>
 
       <style>{`
-        /* ページ全体に対して余白・スクロールを強制無効化 */
-        :global(html), :global(body) {
-          margin: 0 !important;
-          padding: 0 !important;
-          overflow: hidden !important;
-          height: 100dvh !important;
-          width: 100vw !important;
-        }
-
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes pulse { 0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,255,255,0.7); } 70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(255,255,255,0); } 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,255,255,0); } }
       `}</style>
